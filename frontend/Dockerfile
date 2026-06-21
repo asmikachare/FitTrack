@@ -10,7 +10,7 @@ COPY package*.json ./
 RUN npm ci --omit=dev
 
 COPY . .
-RUN npm run build
+RUN NODE_OPTIONS="--max-old-space-size=460" npm run build
 
 FROM nginx:alpine
 COPY --from=build /app/build /usr/share/nginx/html
